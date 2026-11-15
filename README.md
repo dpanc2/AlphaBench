@@ -10,7 +10,6 @@ cd alphaBench
 | Benchmark | Start here |
 | --- | --- |
 | Gene expression | [Prepare ENCODE TPMs, predict expression, and compare](benchmarks/expression/README.md) |
-| Gene expression against official targets | [Evaluate released RNA-seq coverage](docs/GENE_EXPRESSION_PAPER.md) |
 | CAGI5 MPRA | [Run zero-shot DNase variant scoring](benchmarks/mpra/README.md) |
 | ATAC-seq | [Prepare held-out regions and compare with ChromBPNet](benchmarks/atac/README.md) |
 | eQTL | [Rebuild GTEx datasets, predict, and evaluate](benchmarks/eqtl/README.md) |
