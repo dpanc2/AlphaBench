@@ -70,4 +70,4 @@ Use the configuration examples in `configs/`; obsolete upstream launchers and
 configs have been removed. Their history remains available in Git.
 
 The upstream MIT license is retained; see [provenance](UPSTREAM.md).
-Repository: https://github.com/dpanc2/BenchAG.
+Repository: https://github.com/dpanc2/alphaBench.

@@ -1,10 +1,10 @@
-# BenchAG
+# alphaBench
 
-BenchAG runs independent AlphaGenome benchmarks using public experimental data.
+alphaBench runs independent AlphaGenome benchmarks using public experimental data.
 
 ```bash
-git clone https://github.com/dpanc2/BenchAG.git
-cd BenchAG
+git clone https://github.com/dpanc2/alphaBench.git
+cd alphaBench
 ```
 
 | Benchmark | Start here |
@@ -20,5 +20,9 @@ Run commands from the repository root. API benchmarks use
 `ALPHAGENOME_API_KEY`. MPRA and enhancer–promoter inference use a CUDA GPU
 and the AlphaGenome ALL_FOLDS checkpoint. See [data setup](data/README.md)
 for shared inputs. Downloaded data and outputs go under `data/` and `results/`.
+
+To run the Borzoi expression demo with an agent, point it to the
+[benchmark skill](skills/benchmark/SKILL.md). See the [Borzoi guide](benchmarks/borzoi/README.md)
+for the same workflow from the terminal.
 
 [License](LICENSE) · [Source attribution](docs/UPSTREAM.md)
