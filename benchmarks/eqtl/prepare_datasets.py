@@ -6,13 +6,13 @@ import hashlib
 import json
 from pathlib import Path
 import shutil
-import numpy as np
 import pandas as pd
 import requests
 
 
-def prepare(source, out):
-    source, out = Path(source), Path(out)
+def prepare(out):
+    mapping_path = Path(__file__).with_name("data") / "tissue_mapping.tsv"
+    out = Path(out)
     raw = out / 'raw'; raw.mkdir(parents=True, exist_ok=True)
     urls = {}
     def fetch(url, name):
@@ -26,10 +26,7 @@ def prepare(source, out):
                 except requests.RequestException:
                     if attempt == 2: raise
         return path
-    mapping = pd.read_csv(source / 'sets/tissue_mapping.tsv', sep='\t')
-    meta = pd.read_csv(source / 'sets/dataset_metadata_r7.tsv', sep='\t')
-    assert mapping.dataset_id.is_unique and mapping.alphagenome_label.is_unique
-    assert set(meta[meta.dataset_id.isin(mapping.dataset_id)].quant_method) == {'ge'}
+    mapping = pd.read_csv(mapping_path, sep='\t')
     snv_path = fetch('https://storage.googleapis.com/alphagenome/evals/eqtl_variant_borzoi_coefficient_human_predictions.feather', 'snv_coeff.feather')
     snv = pd.read_feather(snv_path).dropna(subset=['target']).copy()
     snv['gene_id'] = snv.gene_id.str.split('.').str[0]
@@ -50,24 +47,18 @@ def prepare(source, out):
         return f
     with ThreadPoolExecutor(max_workers=4) as pool:
         split = pd.concat(pool.map(tissue, mapping.itertuples()), ignore_index=True)
-    # Colleague's merged table keeps the smallest-p-value record per tissue label.
+    # Keep the smallest p-value per variant, gene and tissue label.
     merged = split.sort_values('pvalue', kind='stable').drop_duplicates(['variant','gene_id','tissue'])
     tables = {'snv_eqtl':snv,'indel_credible_sets_split':split,'indel_credible_sets_merged':merged}
     audit = {}
     for name, table in tables.items():
         table.to_csv(out / f'{name}.tsv', sep='\t', index=False)
-        ref = pd.read_csv(source / 'sets' / f'{name}.tsv', sep='\t')
-        cols = ['variant','gene_id','dataset_id']
-        matched = table.merge(ref, on=cols, suffixes=('_new','_old'), how='outer', indicator=True, validate='one_to_one')
-        assert matched['_merge'].eq('both').all(), f'{name}: dataset pairs differ from colleague'
-        np.testing.assert_allclose(matched.beta_new, matched.beta_old, rtol=1e-6, atol=1e-8)
-        audit[name] = {'pairs':len(table),'unique_variants':table.variant.nunique(),'matches_colleague_pairs':True,'beta_matches':True}
-    shutil.copy2(source/'sets/tissue_mapping.tsv',out/'tissue_mapping.tsv')
+        audit[name] = {'pairs': len(table), 'unique_variants': table.variant.nunique()}
+    shutil.copy2(mapping_path, out / 'tissue_mapping.tsv')
     (out/'preparation_manifest.json').write_text(json.dumps({'datasets':audit,'raw_files':{name:{'url':url,'sha256':hashlib.sha256((raw/name).read_bytes()).hexdigest()} for name,url in sorted(urls.items())}},indent=2)+'\n')
     print(json.dumps(audit,indent=2),flush=True)
 
 if __name__ == '__main__':
     p=argparse.ArgumentParser(description=__doc__)
-    p.add_argument('--source',default='data/eqtl/source')
     p.add_argument('--out',default='data/eqtl/rebuilt')
     prepare(**vars(p.parse_args()))

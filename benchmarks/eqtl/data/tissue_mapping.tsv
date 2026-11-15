@@ -1,0 +1,50 @@
+dataset_id	sample_group	tissue_label	alphagenome_label
+QTD000116	adipose_subcutaneous	adipose	Adipose_Subcutaneous
+QTD000121	adipose_visceral	adipose (visceral)	Adipose_Visceral_Omentum
+QTD000126	adrenal_gland	adrenal gland	Adrenal_Gland
+QTD000131	artery_aorta	artery (aorta)	Artery_Aorta
+QTD000136	artery_coronary	artery (coronary)	Artery_Coronary
+QTD000141	artery_tibial	artery (tibial)	Artery_Tibial
+QTD000146	brain_amygdala	brain (amygdala)	Brain_Amygdala
+QTD000151	brain_anterior_cingulate_cortex	brain (anterior cingulate cortex)	Brain_Anterior_cingulate_cortex_BA24
+QTD000156	brain_caudate	brain (caudate)	Brain_Caudate_basal_ganglia
+QTD000161	brain_cerebellar_hemisphere	brain (cerebellum)	Brain_Cerebellar_Hemisphere
+QTD000166	brain_cerebellum	brain (cerebellum)	Brain_Cerebellum
+QTD000171	brain_cortex	brain (cortex)	Brain_Cortex
+QTD000176	brain_frontal_cortex	brain (DLPFC)	Brain_Frontal_Cortex_BA9
+QTD000181	brain_hippocampus	brain (hippocampus)	Brain_Hippocampus
+QTD000186	brain_hypothalamus	brain (hypothalamus)	Brain_Hypothalamus
+QTD000191	brain_nucleus_accumbens	brain (nucleus accumbens)	Brain_Nucleus_accumbens_basal_ganglia
+QTD000196	brain_putamen	brain (putamen)	Brain_Putamen_basal_ganglia
+QTD000201	brain_spinal_cord	brain (spinal cord)	Brain_Spinal_cord_cervical_c-1
+QTD000206	brain_substantia_nigra	brain (substantia nigra)	Brain_Substantia_nigra
+QTD000211	breast	breast	Breast_Mammary_Tissue
+QTD000216	fibroblast	fibroblast	Cells_Cultured_fibroblasts
+QTD000221	LCL	LCL	Cells_EBV-transformed_lymphocytes
+QTD000226	colon_sigmoid	sigmoid colon	Colon_Sigmoid
+QTD000231	colon_transverse	transverse colon	Colon_Transverse
+QTD000236	esophagus_gej	esophagus (gej)	Esophagus_Gastroesophageal_Junction
+QTD000241	esophagus_mucosa	esophagus (mucosa)	Esophagus_Mucosa
+QTD000246	esophagus_muscularis	esophagus (muscularis)	Esophagus_Muscularis
+QTD000251	heart_atrial_appendage	heart (atrial appendage)	Heart_Atrial_Appendage
+QTD000256	heart_left_ventricle	heart (left ventricle)	Heart_Left_Ventricle
+QTD000261	kidney_cortex	kidney (cortex)	Kidney_Cortex
+QTD000266	liver	liver	Liver
+QTD000271	lung	lung	Lung
+QTD000276	minor_salivary_gland	minor salivary gland	Minor_Salivary_Gland
+QTD000281	muscle	muscle	Muscle_Skeletal
+QTD000286	nerve_tibial	tibial nerve	Nerve_Tibial
+QTD000291	ovary	ovary	Ovary
+QTD000296	pancreas	pancreas	Pancreas
+QTD000301	pituitary	pituitary	Pituitary
+QTD000306	prostate	prostate	Prostate
+QTD000311	skin_not_sun_exposed	skin (suprapubic)	Skin_Not_Sun_Exposed_Suprapubic
+QTD000316	skin_sun_exposed	skin	Skin_Sun_Exposed_Lower_leg
+QTD000321	small_intestine	small intestine	Small_Intestine_Terminal_Ileum
+QTD000326	spleen	spleen	Spleen
+QTD000331	stomach	stomach	Stomach
+QTD000336	testis	testis	Testis
+QTD000341	thyroid	thyroid	Thyroid
+QTD000346	uterus	uterus	Uterus
+QTD000351	vagina	vagina	Vagina
+QTD000356	blood	blood	Whole_Blood
