@@ -21,8 +21,6 @@ Run commands from the repository root. API benchmarks use
 and the AlphaGenome ALL_FOLDS checkpoint. See [data setup](data/README.md)
 for shared inputs. Downloaded data and outputs go under `data/` and `results/`.
 
-To run the Borzoi expression demo with an agent, point it to the
-[benchmark skill](skills/benchmark/SKILL.md). See the [Borzoi guide](benchmarks/borzoi/README.md)
-for the same workflow from the terminal.
+For agent-assisted runs, use the [benchmark skill](skills/benchmark/SKILL.md).
 
 [License](LICENSE) · [Source attribution](docs/UPSTREAM.md)
