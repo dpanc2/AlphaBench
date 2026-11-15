@@ -7,8 +7,7 @@ AlphaGenome requests.
 ## 1. Match your samples to AlphaGenome
 
 Start with your original `file_mappings.csv`: it needs an `id` column containing
-ENCODE accessions. Keep `original_id` if available; it provides a fallback accession.
-For mixed-species files, `genome` or `assembly` selects the requested organism.
+ENCODE accessions.
 
 ```bash
 python benchmarks/expression/scripts/build_alphagenome_ontology_map.py \
@@ -21,9 +20,6 @@ It writes these files under `benchmarks/expression/data/`:
 - `qnorm_alphagenome_ontology_map.csv`: ENCODE metadata for each sample.
 - `qnorm_alphagenome_support_summary.csv`: whether AG has that ontology and assay.
 
-Check **`alphagenome_ontology_assay_supported`** for an exact match.
-`alphagenome_supported` checks the ontology alone. Unresolved samples stay in the
-table with their errors. ENCODE responses are cached; rerunning reuses them.
 AG metadata is read from `alphagenome_human_rna_seq_metadata.csv`, or exported if
 absent. `--metadata` selects a different snapshot. The historical `qnorm` filenames
 do not mean this step normalizes expression.
@@ -78,7 +74,7 @@ mm10 genes, and separate output directories. The ontology/support filenames gain
 
 ## Prepare your own ground truth
 
-Two scripts, based on Benjamin's [ExpressionPredict code](https://github.com/minjaf/ExpressionPredict/tree/6c10d3b7f2022488f40c6d3c52ddca338756cea5/src):
+Download sample TPMs:
 
 ```bash
 python benchmarks/expression/scripts/download_tpms.py \
@@ -116,5 +112,3 @@ and do not claim to recreate the historical matrices. Manifests record inputs.
 - [Prepare the support table from file mappings](notebooks/prepare_ontology_support_from_file_mappings.ipynb).
 - [Explain ontology overlap and sample grouping](notebooks/ontology_mapping_explained.ipynb).
 - [Model folds and gene TSS verification](notebooks/AG_versions.ipynb).
-
-See [the official target workflow](../../docs/GENE_EXPRESSION_PAPER.md) for exon-coverage evaluation, and the [128 kb instructions](../../docs/RUN_128KB.md) for existing aglab inputs.

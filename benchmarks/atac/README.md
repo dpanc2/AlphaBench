@@ -5,7 +5,7 @@ Requires Linux, Python 3.10/3.11 and an AlphaGenome API key. No GPU is needed.
 
 ## 1. Open the project and load your key
 
-From the BenchAG repository root:
+From the repository root:
 
 ```bash
 bash scripts/setup.sh
@@ -15,8 +15,12 @@ export ALPHAGENOME_API_KEY='paste-your-key-here'
 
 ## 2. Prepare the BED files once
 
-Open [`prepare_inputs.ipynb`](prepare_inputs.ipynb), select the BenchAG `.venv`
-kernel and run all cells. It creates both BED files in `data/atac/`.
+Open [`prepare_inputs.ipynb`](prepare_inputs.ipynb), select the `.venv`
+kernel and run all cells. It removes peaks overlapping AlphaGenome training
+regions expanded to 1 Mb and saves `fold0_test_regions.bed` (11,860 peaks)
+and `fold1_test_regions.bed` (13,812 peaks) in `data/atac/`.
+All three models run on the latter set. FOLD_0 is a diagnostic because
+most of those regions overlap its training partitions.
 If needed, install its dependencies first:
 
 ```bash
@@ -42,20 +46,7 @@ nohup bash benchmarks/atac/run_benchmark.sh results/atac/full_run \
   > results/atac/full_run.log 2>&1 &
 ```
 
-The job continues if you disconnect. Follow setup progress with:
-
-```bash
-tail -f results/atac/full_run.log
-```
-
-Once prediction starts, each model writes its own progress log:
-
-```bash
-tail -f results/atac/full_run/fold_1/run.log
-```
-
-The other logs are `fold_0/run.log` and `chrombpnet/run.log` in the same folder.
-Press **Ctrl+C** to stop watching a log; the background job continues.
+Follow progress in `results/atac/full_run.log`. Each model also writes a log in its output directory.
 
 ## Results and restarting
 
@@ -76,17 +67,4 @@ Signal and model files are downloaded into `data/atac/`:
 - [ENCFF113GSV](https://www.encodeproject.org/files/ENCFF113GSV/): ChromBPNet model weights.
 - [ENCFF802KJC](https://www.encodeproject.org/files/ENCFF802KJC/): original IMR-90 peak regions.
 
-The full human reference is **`data/genomes/hg38.fa`**, shared with MPRA.
-ATAC reuses it if present; otherwise it downloads the full UCSC hg38 genome.
-There is no separate ATAC chromosome-subset reference.
-
-[`prepare_inputs.ipynb`](prepare_inputs.ipynb) follows
-[this Colab](https://colab.research.google.com/drive/1qjR2W1LpRbrb0zmGescaiUGe7Ft1k0kN):
-it removes peaks overlapping AG training regions expanded to 1 Mb, and saves
-`fold0_test_regions.bed` (11,860 peaks) and `fold1_test_regions.bed` (13,812 peaks).
-The Colab's original archive, ENCFF574LOE, is for a different experiment.
-
-Our comparison uses **the same 13,812 FOLD_1-filtered peaks for all three models**.
-FOLD_1 is held out; FOLD_0 is a diagnostic because most of these regions overlap
-its training partitions. Prediction and metric code is included in `alpha/` and
-`chrombpnet/`, adapted from [the colleague's benchmark](https://github.com/GalinaK413/atac_bench_example/tree/9e6a91157702b80efbc3b43f23c06e21f7bae856).
+The runner downloads the [shared hg38 FASTA](../../data/README.md#shared-human-reference) if needed.

@@ -1,19 +1,18 @@
-Sample-mapping CSVs listed below are included in Git. Large experimental data
-belongs here or at DATA_ROOT and is excluded from Git. See ../docs/DATA.md.
+# Data
 
-## Included sample mappings
-
-- `file_mappings_borzoi_and_v1_human.csv`: human sample mappings.
-- `file_mappings_borzoi_all.csv`: human and mouse sample mappings; select with `--organism`.
-
-These CSVs are inputs to `benchmarks/expression/scripts/build_alphagenome_ontology_map.py`.
-Paths inside them refer to the original dataset; the ontology script only uses
-accessions and species labels, so those external files are not needed for mapping.
+The bundled `file_mappings_borzoi_and_v1_human.csv` and
+`file_mappings_borzoi_all.csv` provide ENCODE sample IDs for the
+[expression workflow](../benchmarks/expression/README.md).
 
 ## Shared human reference
 
-Use `data/genomes/hg38.fa` for human benchmarks requiring a local genome.
-ATAC, MPRA, and enhancer–promoter inference use this path. On aglab it points to the full GRCh38 reference
-in `CAGE_index_build/reference/`. The ATAC runner downloads full UCSC hg38
-only if the shared FASTA is missing. Expression and eQTL API predictions do not require a local FASTA.
-Mouse benchmarks use their own mm10 assembly.
+ATAC-seq, MPRA, and enhancer–promoter use `data/genomes/hg38.fa`.
+The ATAC runner downloads it if needed. To set it up separately:
+
+```bash
+mkdir -p data/genomes
+curl --fail --location --retry 3 \
+  https://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz \
+  -o data/genomes/hg38.fa.gz
+gzip -dc data/genomes/hg38.fa.gz > data/genomes/hg38.fa
+```
