@@ -23,4 +23,4 @@ for shared inputs. Downloaded data and outputs go under `data/` and `results/`.
 
 For agent-assisted runs, use the [benchmark skill](skills/benchmark/SKILL.md).
 
-[License](LICENSE) · [Source attribution](docs/UPSTREAM.md)
+[License](LICENSE)
