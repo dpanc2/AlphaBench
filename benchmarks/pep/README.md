@@ -1,8 +1,17 @@
 # Enhancer–promoter interactions
 
 Score how shuffling a 2 kb enhancer changes predicted K562 RNA-seq for its
-target gene. The CRISPR enhancer–gene pairs are included in
-`data/EP.GRCh38-c.tsv`.
+target gene.
+
+## Data
+
+[`EP.GRCh38-c.tsv`](data/EP.GRCh38-c.tsv) is the prepared GRCh38 table for the
+K562 CRISPRi enhancer–gene linking benchmark. It contains 10,356 candidate pairs,
+including 471 positives. The runner uses `Regulated` as the label and the
+`center` field as the zero-based start of the 2 kb replacement. The default
+1 Mb window retains 6,606 pairs. See the
+[ENCODE–rE2G study](https://doi.org/10.1038/s41586-026-10781-4) and the
+[AlphaGenome enhancer–gene evaluation](https://doi.org/10.1038/s41586-025-10014-0).
 
 ## Run
 
@@ -25,5 +34,11 @@ and pass the same `--out` to `auc.py`.
 
 Scores and auPRC are saved in `results/pep/api_v1/`. The metrics include
 the subset under 6 kb and the broader distance groups. Quantile scores are
-evaluated when returned by the API. Rerun the same command to reuse cached
-pairs. If the API rate-limits the run, lower `--threads` and retry.
+evaluated when returned by the API.
+
+## API rate limits
+
+`--threads` controls concurrent requests and defaults to 5. If the API returns
+a quota or rate-limit error, wait briefly, then rerun with `--threads 1` and
+the same output directory. The runner reuses completed pair files and resumes
+scoring the remaining pairs.
