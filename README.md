@@ -3,7 +3,7 @@
 AlphaBench runs independent AlphaGenome benchmarks using public experimental data.
 
 ```bash
-git clone https://github.com/dpanc2/alphaBench.git AlphaBench
+git clone https://github.com/dpanc2/AlphaBench.git
 cd AlphaBench
 ```
 
