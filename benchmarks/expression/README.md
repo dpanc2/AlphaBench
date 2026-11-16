@@ -1,6 +1,6 @@
 # Expression benchmark
 
-Run commands from the **BenchAG repository root** with the environment activated.
+Run commands from the **AlphaBench repository root** with the environment activated.
 First-time setup: `bash scripts/setup.sh`. Set `ALPHAGENOME_API_KEY` before making
 AlphaGenome requests.
 
@@ -106,6 +106,22 @@ Run human and mouse **separately**. For mouse downloads use
 Use the raw or normalized matrix as `--truth` in the comparison command above.
 Changing the gene/sample pool changes qnorm values; these scripts prepare new GT
 and do not claim to recreate the historical matrices. Manifests record inputs.
+
+## AlphaGenome 2
+
+Use a separate Python 3.11+ environment with `alphagenome==2.0.0` and the
+same gene table and all-IDs mapping as above:
+
+```bash
+python scripts/predict_expression_ag2.py \
+  --genes inputs/genes.tsv --mapping inputs/human_mapping/track_to_all_ids.json \
+  --organism human --window 1mb --out results/expression/ag2
+```
+
+This starts a 32-gene, eight-condition pilot. Add `--max-genes 0 --max-conditions 0`
+for all genes and matched conditions. Use `--plan-only` to see the API request
+count. AlphaGenome 2 scores one condition per request. Rerun the same command
+to resume, and evaluate `predictions.csv` with the comparison command above.
 
 ## Notebooks
 

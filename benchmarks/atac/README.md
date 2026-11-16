@@ -1,7 +1,7 @@
 # ATAC-seq benchmark
 
 Compare AlphaGenome FOLD_0, FOLD_1 and ChromBPNet on IMR-90 ATAC-seq data.
-Requires Linux, Python 3.10/3.11 and an AlphaGenome API key. No GPU is needed.
+Requires Linux, Python 3.10/3.11 and an AlphaGenome API key. The bundled ChromBPNet setup runs on CPU.
 
 ## 1. Open the project and load your key
 
